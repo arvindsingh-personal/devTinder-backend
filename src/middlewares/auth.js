@@ -8,7 +8,6 @@ const userAuth = async (req, res, next) => {
             throw new Error("Login to continue!");
         }
         const decodedMessage = jwt.verify(token, "Dev@Tinder@123");
-        console.log("decodedMessage", decodedMessage)
         const { id } = decodedMessage;
         const user = await User.findById({_id:id});
         console.log(user)
