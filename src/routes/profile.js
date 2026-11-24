@@ -43,7 +43,6 @@ profileRouter.patch("/user/:userId", async(req, res) => {
     try {
         const userId = req.params.userId;
         const data = req.body;
-        console.log("userid", userId, "data", data);
         const ALLOWED_OPERATIONS = ["firstName", "lastName", "password"];
         const isUpdateAllowed = Object.keys(data).every((k) =>
             ALLOWED_OPERATIONS.includes(k)
@@ -56,7 +55,6 @@ profileRouter.patch("/user/:userId", async(req, res) => {
             returnDocument: "after",
             runValidators: true
         })
-        console.log("User", user);
         res.send("User updated successfully!");
     } catch (err) {
         res.status(400).send("Update Failed: " + err.message);
@@ -69,7 +67,6 @@ profileRouter.patch("/profile/edit", userAuth, async(req, res) => {
             throw new Error("Invalide edit operation!")
         }
         const loggedInUser = req.user;
-        console.log(loggedInUser);
         Object.keys(req.body).every((key) => (loggedInUser[key] = req.body[key]));
         await loggedInUser.save()
         res.send({
