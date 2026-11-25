@@ -31,7 +31,6 @@ authRouter.post("/login", async(req, res) => {
     try {
         const {emailId, password} = req.body;
         const user = await User.findOne({emailId: emailId})
-        // console.log("user", user)
         if(!user) {
             throw new Error("Invalid credentials");
         }
@@ -43,7 +42,10 @@ authRouter.post("/login", async(req, res) => {
 
             // Add the token to cookie and send the response back to the user
             res.cookie("token", token, {expires: new Date(Date.now() + 8 * 3600000), httpOnly: true});
-            res.send("Login successful!");
+            res.json({
+                message: "LoggedIn successfully!",
+                data: user
+            })
         } else {
             throw new Error("Invalid credentials");
         }

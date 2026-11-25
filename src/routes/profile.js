@@ -7,7 +7,7 @@ const bcrypt = require("bcrypt");
 
 const profileRouter = express.Router();
 
-profileRouter.get("/profile", userAuth, async (req, res) => {
+profileRouter.get("/profile/view", userAuth, async (req, res) => {
     try {
     const user = req.user;
     res.send(user);
@@ -78,7 +78,7 @@ profileRouter.patch("/profile/edit", userAuth, async(req, res) => {
     }
 });
 
-  profileRouter.patch("/profile/password", userAuth, async (req, res) => {
+    profileRouter.patch("/profile/password", userAuth, async (req, res) => {
         try {
             const loggedInUser = req.user;
             const newPassword = req.body.password;
@@ -90,6 +90,6 @@ profileRouter.patch("/profile/edit", userAuth, async(req, res) => {
         } catch (err) {
             res.status(400).send('Error: ' + err.message);
         }
-    })
+    });
 
 module.exports = profileRouter;
