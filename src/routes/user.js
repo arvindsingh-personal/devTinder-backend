@@ -11,7 +11,8 @@ userRouter.get("/user/request/received", userAuth, async(req, res) => {
     const loggedInUser = req.user;
     try {
         const connectionRequest = await ConnectionRequest.find({
-            toUserId: loggedInUser._id
+            toUserId: loggedInUser._id,
+            status: "interested"
         }).populate("fromUserId", USER_SAFE_DATA);
 
         res.json({

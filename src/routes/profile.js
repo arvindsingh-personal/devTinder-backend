@@ -66,15 +66,16 @@ profileRouter.patch("/profile/edit", userAuth, async(req, res) => {
         if(!validateEditData(req)) {
             throw new Error("Invalide edit operation!")
         }
+        console.log(req.body)
         const loggedInUser = req.user;
         Object.keys(req.body).every((key) => (loggedInUser[key] = req.body[key]));
-        await loggedInUser.save()
+        await loggedInUser.save();
         res.send({
             message: `${loggedInUser.firstName}'s profile updated successfully!`,
             data: loggedInUser
         });
     } catch (err) {
-        res.status(400).send('Error: ' + err.message);
+       return res.status(400).json(err.message);
     }
 });
 

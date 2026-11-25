@@ -13,7 +13,7 @@ const validateSignup = (req) => {
 }
 
 const validateEditData = (req) => {
-    const ALLOWED_OPERATIONS = ["firstName", "lastName", "phototUrl", "skills", "about"];
+    const ALLOWED_OPERATIONS = ["firstName", "lastName", "phototUrl", "skills", "about", "gender", "age"];
     const isEditAllowed = Object.keys(req.body).every((key) => ALLOWED_OPERATIONS.includes(key));
     return isEditAllowed;
 }
