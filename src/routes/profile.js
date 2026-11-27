@@ -10,7 +10,10 @@ const profileRouter = express.Router();
 profileRouter.get("/profile/view", userAuth, async (req, res) => {
     try {
     const user = req.user;
-    res.send(user);
+    res.json({
+        message: "Profile data fetched successfully!",
+        data: user
+    });
     } catch (err) {
          res.status(400).send("Error: " + err.message);
     }
@@ -66,10 +69,10 @@ profileRouter.patch("/profile/edit", userAuth, async(req, res) => {
         if(!validateEditData(req)) {
             throw new Error("Invalide edit operation!")
         }
-        console.log(req.body)
         const loggedInUser = req.user;
         Object.keys(req.body).every((key) => (loggedInUser[key] = req.body[key]));
         await loggedInUser.save();
+        console.log(loggedInUser)
         res.send({
             message: `${loggedInUser.firstName}'s profile updated successfully!`,
             data: loggedInUser

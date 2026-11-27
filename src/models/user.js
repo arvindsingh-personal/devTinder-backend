@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema({
             }
         }
     },
-    phototUrl: {
+    photoUrl: {
         type: String,
         default: "https://www.shutterstock.com/image-vector/user-profile-icon-yellow-circle-logo-1484290709"
     },
